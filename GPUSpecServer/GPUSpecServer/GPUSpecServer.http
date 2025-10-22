@@ -1,0 +1,6 @@
+@GPUSpecServer_HostAddress = http://localhost:5043
+
+GET {{GPUSpecServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
