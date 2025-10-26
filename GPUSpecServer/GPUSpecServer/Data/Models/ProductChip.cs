@@ -2,6 +2,8 @@
 {
     public class ProductChip
     {
+        public int Id { get; set; }
+
         public int ProductId { get; set; }
         public Product? Product { get; set; }
         public int ChipId { get; set; }
@@ -24,7 +26,7 @@
         public required int rops { get; set; }
         public required int smus { get; set; }
         public required int l1_cache { get; set; }
-        public required decimal l2_cache { get; set; }
+        public required float l2_cache { get; set; }
         public int? tdp { get; set; }
         public int? board_length { get; set; }
         public int? board_width { get; set; }
@@ -33,12 +35,12 @@
         public string? power_connectors { get; set; }
         public string? display_connectors { get; set; }
 
-        public decimal pixel_rate { get; set; }
-        public decimal texture_rate { get; set; }
+        public float pixel_rate { get; set; }
+        public float texture_rate { get; set; }
 
-        public decimal fp16{ get; set; }
-        public decimal fp32 { get; set; }
-        public decimal fp64 { get; set; }
+        public float fp16 { get; set; }
+        public float fp32 { get; set; }
+        public float fp64 { get; set; }
 
         public required string tpu_id { get; set; }
         public required string tpu_url { get; set; }
