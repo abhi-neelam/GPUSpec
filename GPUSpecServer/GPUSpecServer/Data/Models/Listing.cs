@@ -1,4 +1,6 @@
-﻿namespace GPUSpecServer.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GPUSpecServer.Data.Models
 {
     public class Listing
     {
@@ -24,7 +26,7 @@
         public required int smus { get; set; }
 
         public int ProductId { get; set; }
-        public Product? Product { get; set; }
+        public Product Product { get; set; } = null!;
 
         public required float l1_cache { get; set; }
         public required float l2_cache { get; set; }
@@ -37,7 +39,7 @@
         public string? display_connectors { get; set; }
 
         public int ChipId { get; set; }
-        public Chip? Chip { get; set; }
+        public Chip Chip { get; set; } = null!;
 
         public float pixel_rate { get; set; }
         public float texture_rate { get; set; }
