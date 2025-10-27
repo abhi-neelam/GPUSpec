@@ -36,8 +36,9 @@ namespace GPUSpecServer.Data
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
             .UseSeeding((context, _) =>
             {
-                var chips = new Dictionary<string, Chip>();
-                var products = new Dictionary<string, Product>();
+                var chips = context.Set<Chip>().ToDictionary(c => c.Name, c => c);
+                var products = context.Set<Product>().ToDictionary(p => p.Name, p => p);
+                var listings = context.Set<Listing>().ToDictionary(l => l.tpu_id, l => l);
 
                 string csvpath = Path.Combine(environment.ContentRootPath, "Data/Source/Clean/2025-08.csv");
                 using (var reader = new StreamReader(csvpath))
@@ -104,7 +105,12 @@ namespace GPUSpecServer.Data
                             fp16 = record.fp16, fp32 = record.fp32, fp64 = record.fp64,
                             tpu_id = record.tpu_id, tpu_url = record.tpu_url
                         };
-                        context.Set<Listing>().Add(listing);
+
+                        if (!listings.ContainsKey(record.tpu_id))
+                        {
+                            context.Set<Listing>().Add(listing);
+                            listings.Add(record.tpu_id, listing);
+                        }
                     }
                 }
 
