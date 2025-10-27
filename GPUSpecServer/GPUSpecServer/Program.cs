@@ -1,9 +1,7 @@
 using GPUSpecServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using OfficeOpenXml;
 
-ExcelPackage.License.SetNonCommercialPersonal("Abhinav Neelam");
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
