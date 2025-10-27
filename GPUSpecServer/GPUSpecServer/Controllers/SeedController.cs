@@ -1,6 +1,9 @@
 ﻿using GPUSpecServer.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Metrics;
+using System.Formats.Asn1;
+using System.Globalization;
 
 namespace GPUSpecServer.Controllers
 {
@@ -8,10 +11,15 @@ namespace GPUSpecServer.Controllers
     [ApiController]
     public class SeedController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        public SeedController(ApplicationDbContext context)
+        private readonly ApplicationDbContext context;
+        IHostEnvironment environment;
+        string? csvpath = null;
+
+        public SeedController(ApplicationDbContext context, IHostEnvironment environment)
         {
-            _context = context;
+            this.context = context;
+            this.environment = environment;
+            csvpath = Path.Combine(environment.ContentRootPath, "Data/Source/Clean/2025-08.csv");
         }
     }
 }
