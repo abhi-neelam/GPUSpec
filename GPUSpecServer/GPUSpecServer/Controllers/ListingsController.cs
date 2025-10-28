@@ -24,37 +24,42 @@ namespace GPUSpecServer.Controllers
 
         // GET: api/Listings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetListings()
+        public async Task<ActionResult<PagedResult<ListingDTO>>> GetListings([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 10, [FromQuery] string orderBy = "desc")
         {
-            return await _context.Listings.Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size=l.Chip.process_size }).ToListAsync();
+            var query = _context.Listings.AsNoTracking().Select(ListingDTO.Projection);
+            return await PagedResult<ListingDTO>.CreateAsync(query, pageIndex, pageSize, "release_date", orderBy);
         }
 
         // GET: api/Listings/Manufacturer/NVIDIA
         [HttpGet("Manufacturer/{manufacturer}")]
-        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetManufacturerListings(string manufacturer)
+        public async Task<ActionResult<PagedResult<ListingDTO>>> GetManufacturerListings(string manufacturer, [FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 10, [FromQuery] string orderBy = "desc")
         {
-            return await _context.Listings.Where(l => l.manufacturer.ToLower() == manufacturer.ToLower()).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size = l.Chip.process_size }).ToListAsync();
+            var query = _context.Listings.AsNoTracking().Where(l => l.manufacturer.ToLower() == manufacturer.ToLower()).Select(ListingDTO.Projection);
+            return await PagedResult<ListingDTO>.CreateAsync(query, pageIndex, pageSize, "release_date", orderBy);
         }
 
         // GET: api/Listings/Architecture/NVIDIA
         [HttpGet("Architecture/{architecture}")]
-        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetArchitectureListings(string architecture)
+        public async Task<ActionResult<PagedResult<ListingDTO>>> GetArchitectureListings(string architecture, [FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 10, [FromQuery] string orderBy = "desc")
         {
-            return await _context.Listings.Where(l => l.architecture.ToLower() == architecture.ToLower()).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size = l.Chip.process_size }).ToListAsync();
+            var query = _context.Listings.AsNoTracking().Where(l => l.architecture.ToLower() == architecture.ToLower()).Select(ListingDTO.Projection);
+            return await PagedResult<ListingDTO>.CreateAsync(query, pageIndex, pageSize, "release_date", orderBy);
         }
 
         // GET: api/Listings/Generation/NVIDIA
         [HttpGet("Generation/{generation}")]
-        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetGenerationListings(string generation)
+        public async Task<ActionResult<PagedResult<ListingDTO>>> GetGenerationListings(string generation, [FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 10, [FromQuery] string orderBy = "desc")
         {
-            return await _context.Listings.Where(l => l.generation.ToLower() == generation.ToLower()).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size = l.Chip.process_size }).ToListAsync();
+            var query = _context.Listings.AsNoTracking().Where(l => l.generation.ToLower() == generation.ToLower()).Select(ListingDTO.Projection);
+            return await PagedResult<ListingDTO>.CreateAsync(query, pageIndex, pageSize, "release_date", orderBy);
         }
 
         // GET: api/Listings/Chip/NVIDIA
         [HttpGet("Chip/{chip}")]
-        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetChipListings(string chip)
+        public async Task<ActionResult<PagedResult<ListingDTO>>> GetChipListings(string chip, [FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 10, [FromQuery] string orderBy = "desc")
         {
-            return await _context.Listings.Where(l => l.Chip.Name.ToLower() == chip.ToLower()).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size = l.Chip.process_size }).ToListAsync();
+            var query = _context.Listings.AsNoTracking().Where(l => l.Chip.Name.ToLower() == chip.ToLower()).Select(ListingDTO.Projection);
+            return await PagedResult<ListingDTO>.CreateAsync(query, pageIndex, pageSize, "release_date", orderBy);
         }
 
         // GET: api/Listings/5

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GPUSpecServer.Data;
+using GPUSpecServer.Data.Models;
+using GPUSpecServer.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GPUSpecServer.Data;
-using GPUSpecServer.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GPUSpecServer.Controllers
 {
@@ -23,9 +24,10 @@ namespace GPUSpecServer.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<PagedResult<Product>>> GetProducts([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 10)
         {
-            return await _context.Products.ToListAsync();
+            var query = _context.Products.AsNoTracking();
+            return await PagedResult<Product>.CreateAsync(query, pageIndex, pageSize, "Name", "");
         }
 
         // GET: api/Products/5
