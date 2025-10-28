@@ -23,9 +23,9 @@ namespace GPUSpecServer.Controllers
 
         // GET: api/Chips
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Chip>>> GetChips()
+        public async Task<ActionResult<IEnumerable<string>>> GetChips()
         {
-            return await _context.Chips.ToListAsync();
+            return await _context.Listings.Select(l => l.Chip.Name).Distinct().ToListAsync();
         }
 
         // GET: api/Chips/5

@@ -3,7 +3,6 @@ using GPUSpecServer.Data.Models;
 using GPUSpecServer.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using System.Text.Json;
 
 namespace GPUSpecServer.Data
 {
@@ -117,5 +116,6 @@ namespace GPUSpecServer.Data
                 context.SaveChanges();
             });
         }
+        public DbSet<GPUSpecServer.DTOs.ListingDTO> ListingDTO { get; set; } = default!;
     }
 }

@@ -26,7 +26,35 @@ namespace GPUSpecServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ListingDTO>>> GetListings()
         {
-            return await _context.Listings.Include(p => p.Product).Include(c => c.Chip).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size=l.Chip.process_size }).ToListAsync();
+            return await _context.Listings.Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size=l.Chip.process_size }).ToListAsync();
+        }
+
+        // GET: api/Listings/Manufacturer/NVIDIA
+        [HttpGet("Manufacturer/{manufacturer}")]
+        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetManufacturerListings(string manufacturer)
+        {
+            return await _context.Listings.Where(l => l.manufacturer.ToLower() == manufacturer.ToLower()).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size = l.Chip.process_size }).ToListAsync();
+        }
+
+        // GET: api/Listings/Architecture/NVIDIA
+        [HttpGet("Architecture/{architecture}")]
+        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetArchitectureListings(string architecture)
+        {
+            return await _context.Listings.Where(l => l.architecture.ToLower() == architecture.ToLower()).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size = l.Chip.process_size }).ToListAsync();
+        }
+
+        // GET: api/Listings/Generation/NVIDIA
+        [HttpGet("Generation/{generation}")]
+        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetGenerationListings(string generation)
+        {
+            return await _context.Listings.Where(l => l.generation.ToLower() == generation.ToLower()).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size = l.Chip.process_size }).ToListAsync();
+        }
+
+        // GET: api/Listings/Chip/NVIDIA
+        [HttpGet("Chip/{chip}")]
+        public async Task<ActionResult<IEnumerable<ListingDTO>>> GetChipListings(string chip)
+        {
+            return await _context.Listings.Where(l => l.Chip.Name.ToLower() == chip.ToLower()).Select(l => new ListingDTO { Id = l.Id, ChipId = l.ChipId, ProductId = l.ProductId, chip = l.Chip.Name, product = l.Product.Name, architecture = l.architecture, generation = l.generation, manufacturer = l.manufacturer, memory_size = l.memory_size, release_date = l.release_date, foundry = l.Chip.foundry, process_size = l.Chip.process_size }).ToListAsync();
         }
 
         // GET: api/Listings/5
