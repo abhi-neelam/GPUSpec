@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ListingComponent } from './listing/listing.component';
-import { SearchComponent } from './search/search.component';
-import { LoginComponent } from './login/login.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { BrowsePageComponent } from './browse-page/browse-page.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'search', component: SearchComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
+  { path: 'browse', component: BrowsePageComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginPageComponent, pathMatch: 'full' },
 ];
