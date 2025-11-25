@@ -1,20 +1,37 @@
-<h1>GPUSpec</h1>
-<h2>GPU Technical Specifications</h2>
-<p>
-  View GPU product listings with detailed GPU specification from various
-  manufacturers.
-</p>
-<form action="" method="get">
-  <div>
-    <input
-      type="text"
-      name="listing_name"
-      required
-      placeholder="Enter name of listing"
-    />
-  </div>
-  <div>
-    <button type="submit">Search</button>
-  </div>
-</form>
-<div></div>
+<div class="flex flex-row flex-center">
+  <article class="flex flex-column flex-center gap">
+    <h1>GPUSpec</h1>
+    <h2>GPU Technical Specifications</h2>
+    <p>
+      View GPU product listings with detailed GPU specification from various
+      manufacturers.
+    </p>
+    <form
+      class="search_form flex flex-column flex-center"
+      action=""
+      method="get"
+    >
+      <mat-form-field
+        class="search_field"
+        appearance="fill"
+        style="margin-bottom: -1em"
+      >
+        <input
+          type="text"
+          matInput
+          [formControl]="search_name"
+          placeholder="Enter name of listing"
+        />
+      </mat-form-field>
+      <button
+        class="button search_button"
+        mat-flat-button
+        color="primary"
+        (click)="submit()"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+  </article>
+</div>
