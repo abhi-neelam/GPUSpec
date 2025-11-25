@@ -8,7 +8,8 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-home-page',
@@ -18,13 +19,18 @@ import { RouterLink } from '@angular/router';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterLink,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
-  search_name = new FormControl('');
+  searchForm = new FormGroup({
+    name: new FormControl(''),
+  });
 
-  submit() {}
+  constructor(private router: Router) {}
+
+  onSubmit() {
+    this.router.navigate(['/browse']);
+  }
 }

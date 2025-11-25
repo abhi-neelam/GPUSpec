@@ -8,8 +8,8 @@
     </p>
     <form
       class="search_form flex flex-column flex-center"
-      action=""
-      method="get"
+      [formGroup]="searchForm"
+      (ngSubmit)="onSubmit()"
     >
       <mat-form-field
         class="search_field"
@@ -19,7 +19,7 @@
         <input
           type="text"
           matInput
-          [formControl]="search_name"
+          formControlName="name"
           placeholder="Enter name of listing"
         />
       </mat-form-field>
@@ -27,8 +27,8 @@
         class="button search_button"
         mat-flat-button
         color="primary"
-        (click)="submit()"
         type="submit"
+        (click)="onSubmit()"
       >
         Search
       </button>
