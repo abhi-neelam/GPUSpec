@@ -34,7 +34,7 @@ export class LoginPageComponent {
       return;
     }
 
-    const username = this.loginForm.get('username')?.value;
+    const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
   }
 }
