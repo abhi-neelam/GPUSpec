@@ -1,22 +1,45 @@
-<form class="form flex flex-center" [formGroup]="loginForm">
-  <h3>Login</h3>
-  <mat-form-field class="form-field" appearance="outline">
-    <mat-label>Email</mat-label>
-    <input type="email" matInput formControlName="email" />
-    @if (loginForm.get('email')?.hasError('required')) {
-    <mat-error>Email is required</mat-error>
-    } @if (loginForm.get('email')?.hasError('email')) {
-    <mat-error>Invalid email</mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field class="form-field" appearance="outline">
-    <mat-label>Password</mat-label>
-    <input type="password" matInput formControlName="password" />
-    @if (loginForm.get('password')?.hasError('required')) {
-    <mat-error>Password is required</mat-error>
-    }
-  </mat-form-field>
-  <button mat-stroked-button (click)="submit()" [disabled]="loginForm.invalid">
-    LOGIN
-  </button>
-</form>
+<div class="flex flex-center flex-row">
+  <form class="form flex flex-center flex-column" [formGroup]="loginForm">
+    <h3 class="no-margin mat-primary">
+      <strong class="mat-primary">Sign In</strong>
+    </h3>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        placeholder="Ex. pat@example.com"
+      />
+      @if (loginForm.get('email')?.hasError('required')) {
+      <mat-error>Email is required</mat-error>
+      } @if (loginForm.get('email')?.hasError('email')) {
+      <mat-error>Invalid email</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password" />
+      @if (loginForm.get('password')?.hasError('required')) {
+      <mat-error>Password is required</mat-error>
+      }
+    </mat-form-field>
+    <button
+      class="button"
+      mat-flat-button
+      color="primary"
+      (click)="submit()"
+      [disabled]="loginForm.invalid"
+    >
+      Log In
+    </button>
+
+    <div class="flex flex-center flex-row">
+      <p class="no-margin" color="primary">Not Registered?</p>
+      <a color="primary" [routerLink]="['/signup']">
+        <strong>Sign Up</strong></a
+      >
+    </div>
+  </form>
+</div>
