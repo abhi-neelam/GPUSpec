@@ -35,6 +35,7 @@ if (builder.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
         options.RoutePrefix = string.Empty;
     });
+    app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()); // TODO - setup proper routing for production
 }
 
 app.UseHttpsRedirection();

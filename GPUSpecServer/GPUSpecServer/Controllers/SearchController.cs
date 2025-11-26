@@ -19,13 +19,17 @@ namespace GPUSpecServer.Controllers
 
         private IQueryable<Listing> SearchQuery(IQueryable<Listing> query, string q)
         {
-            query = query.Where(l => l.Product.Name.ToLower().Contains(q.ToLower()));
+            if (!string.IsNullOrEmpty(q))
+            {
+                query = query.Where(l => l.Product.Name.ToLower().Contains(q.ToLower()));
+            }
+
             return query;
         }
 
         // GET: api/Search
         [HttpGet]
-        public async Task<ActionResult<PagedResult<ListingDTO>>> SearchListings([FromQuery] string q, int pageIndex = 1, int pageSize = 10, string orderBy = "desc")
+        public async Task<ActionResult<PagedResult<ListingDTO>>> SearchListings([FromQuery] string? q, int pageIndex = 1, int pageSize = 10, string orderBy = "desc")
         {
             var query = SearchQuery(_context.Listings.AsNoTracking(), q).Select(ListingDTO.Projection);
             return await PagedResult<ListingDTO>.CreateAsync(query, pageIndex, pageSize, "release_date", orderBy);

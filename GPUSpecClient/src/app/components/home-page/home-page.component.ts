@@ -31,6 +31,8 @@ export class HomePageComponent {
   constructor(private router: Router) {}
 
   onSubmit() {
-    this.router.navigate(['/browse']);
+    this.router.navigate(['/browse'], {
+      queryParams: { q: this.searchForm.controls['name'].value },
+    });
   }
 }
