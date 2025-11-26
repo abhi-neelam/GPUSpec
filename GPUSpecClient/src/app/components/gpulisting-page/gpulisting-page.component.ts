@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ListingsComponent } from '../listings/listings.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { FilterbarComponent } from '../filterbar/filterbar.component';
 import { GPUListing } from '../../interfaces/gpulisting';
 import { PagedResult } from '../../interfaces/pagedresult';
 import { Observable } from 'rxjs';

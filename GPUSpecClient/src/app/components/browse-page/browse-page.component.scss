@@ -1,0 +1,27 @@
+.search_container {
+  justify-content: center;
+  align-items: stretch !important;
+  padding: 20px;
+}
+.search_component {
+  justify-content: center;
+  align-items: stretch !important;
+  flex-grow: 4;
+}
+.search_field {
+  flex-grow: 4;
+}
+h1 {
+  margin: 0px;
+  font-size: 18px;
+}
+.browse_text {
+  display: flex;
+  align-items: center;
+}
+.search_button {
+  margin-right: 8px;
+}
+.spacing {
+  flex-grow: 1;
+}

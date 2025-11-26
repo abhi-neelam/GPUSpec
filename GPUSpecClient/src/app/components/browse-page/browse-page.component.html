@@ -1,20 +1,28 @@
-<div>
-  <h1>Browse Listings</h1>
-  <form action="" method="get">
-    <div>
-      <input
-        type="text"
-        name="listing_name"
-        required
-        placeholder="Enter name of listing"
-      />
+<div class="flex flex-row search_container">
+  <span class="spacing"></span>
+  <div class="flex flex-row search_component">
+    <div class="browse_text">
+      <h1>Browse GPU Listings</h1>
     </div>
-    <div>
-      <button type="submit">Search</button>
-    </div>
-  </form>
-</div>
-<div>
-  <app-filterbar></app-filterbar>
-  <app-listings></app-listings>
+
+    <mat-form-field
+      class="search_field"
+      appearance="fill"
+      subscriptSizing="dynamic"
+    >
+      <mat-label>Enter name of listing</mat-label>
+      <input matInput type="text" formControlName="name" />
+
+      <button
+        mat-mini-fab
+        matSuffix
+        class="search_button"
+        color="primary"
+        type="submit"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <span class="spacing"></span>
 </div>

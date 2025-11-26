@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ListingsComponent } from '../listings/listings.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { FilterbarComponent } from '../filterbar/filterbar.component';
 import { Listing } from '../../interfaces/listing';
 import { PagedResult } from '../../interfaces/pagedresult';
 import { Observable } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-browse-page',
   standalone: true,
-  imports: [FilterbarComponent, ListingsComponent],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './browse-page.component.html',
   styleUrl: './browse-page.component.scss',
 })
