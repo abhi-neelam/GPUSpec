@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   ReactiveFormsModule,
   FormControl,
@@ -9,6 +10,9 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
+import { LoginRequest } from '../../interfaces/auth/login-request';
+import { LoginResult } from '../../interfaces/auth/login-result';
 
 @Component({
   selector: 'app-login-page',
@@ -24,17 +28,52 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
+  loginResult?: LoginResult;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
-  submit() {
+  ngOnInit() {
+    this.loginForm.valueChanges.subscribe(() => {
+      this.loginResult = undefined;
+    });
+  }
+
+  onSubmit() {
     if (this.loginForm.invalid) {
       return;
     }
 
-    const email = this.loginForm.get('email')?.value;
-    const password = this.loginForm.get('password')?.value;
+    var loginRequest = <LoginRequest>{};
+    loginRequest.email = this.loginForm.controls['email'].value;
+    loginRequest.password = this.loginForm.controls['password'].value;
+
+    this.authService.login(loginRequest).subscribe({
+      next: (result) => {
+        this.loginResult = result;
+        if (result.success) {
+          this.router.navigate(['/']);
+        }
+      },
+      error: (error) => {
+        if (error.status == 401) {
+          console.log(error.error);
+          this.loginResult = error.error;
+        }
+      },
+    });
   }
 }

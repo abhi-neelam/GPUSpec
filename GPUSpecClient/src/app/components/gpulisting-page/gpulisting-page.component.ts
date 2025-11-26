@@ -29,7 +29,7 @@ export class GPUListingPageComponent {
     var idParam: string = this.activatedRoute.snapshot.paramMap.get('id')!;
 
     this.http
-      .get<GPUListing>(`${environment.baseUrl}/api/Listings/${idParam}`)
+      .get<GPUListing>(`${environment.baseUrl}api/Listings/${idParam}`)
       .subscribe({
         next: (result) => {
           this.data = result;

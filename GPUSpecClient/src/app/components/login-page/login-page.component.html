@@ -23,13 +23,17 @@
       <input type="password" matInput formControlName="password" />
       @if (loginForm.get('password')?.hasError('required')) {
       <mat-error>Password is required</mat-error>
+      } @if (loginResult && !loginResult.success) {
+      <mat-hint class="error-message">
+        {{ loginResult.message }}
+      </mat-hint>
       }
     </mat-form-field>
     <button
       class="button"
       mat-flat-button
       color="primary"
-      (click)="submit()"
+      (click)="onSubmit()"
       [disabled]="loginForm.invalid"
     >
       Log In
@@ -41,5 +45,6 @@
         <strong>Sign Up</strong></a
       >
     </div>
+    <div class="flex flex-center flex-row"></div>
   </form>
 </div>

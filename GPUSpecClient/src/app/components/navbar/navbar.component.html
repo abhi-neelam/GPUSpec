@@ -1,12 +1,27 @@
 <header>
   <mat-toolbar color="primary">
-    <button mat-icon-button class="navbar-logo">
-      <img src="assets/logo.png" alt="My App Logo" width="50px" />
-    </button>
-    <a mat-flat-button color="primary" [routerLink]="['']"> Home </a>
-    <a mat-flat-button color="primary" [routerLink]="['/browse']"> Browse </a>
-    <a mat-flat-button color="primary" [routerLink]="['/login']">
-      Sign In / Register
-    </a>
+    <div class="navbar-container">
+      <div class="nav-section left-section">
+        <a class="navbar-brand" [routerLink]="['/']">
+          <img src="assets/logo.png" alt="Logo" width="40" height="40" />
+          <span class="brand-text">GPUSpec</span>
+        </a>
+      </div>
+
+      <div class="nav-section center-section">
+        <a mat-button [routerLink]="['/']">Home</a>
+        <a mat-button [routerLink]="['/browse']">Browse</a>
+      </div>
+
+      <div class="nav-section right-section">
+        @if (!isLoggedIn) {
+        <a mat-flat-button color="primary" [routerLink]="['/login']">
+          Sign In
+        </a>
+        } @else {
+        <a mat-button (click)="onLogout()">Logout</a>
+        }
+      </div>
+    </div>
   </mat-toolbar>
 </header>

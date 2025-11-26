@@ -20,15 +20,18 @@ namespace GPUSpecServer.Data
             _userManager = userManager;
         }
 
-        public async Task<JwtSecurityToken> GetTokenAsync(ApplicationUser user)
+        public async Task<SecurityTokenDescriptor> GetTokenDescriptorAsync(ApplicationUser user)
         {
-            var jwt = new JwtSecurityToken(
-                issuer: _configuration["JwtSettings:Issuer"],
-                audience: _configuration["JwtSettings:Audience"],
-                claims: await GetClaimsAsync(user),
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpiryInMinutes"])),
-                signingCredentials: GetSigningCredentials());
-            return jwt;
+            var descriptor = new SecurityTokenDescriptor
+            {
+                Issuer = _configuration["JwtSettings:Issuer"],
+                Audience = _configuration["JwtSettings:Audience"],
+                Claims = await GetClaimsAsync(user),
+                Expires = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpiryInMinutes"])),
+                SigningCredentials = GetSigningCredentials()
+            };
+
+            return descriptor;
         }
 
         private SigningCredentials GetSigningCredentials()
@@ -38,16 +41,20 @@ namespace GPUSpecServer.Data
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        private async Task<List<Claim>> GetClaimsAsync(ApplicationUser user)
+        private async Task<Dictionary<string, object>> GetClaimsAsync(ApplicationUser user)
         {
-            var claims = new List<Claim>
+            var claims = new Dictionary<string, object>
             {
-                new Claim(ClaimTypes.Name, user.Email!)
+                { JwtRegisteredClaimNames.Sub, user.Id },
+                { JwtRegisteredClaimNames.Name, user.UserName! },
+                { JwtRegisteredClaimNames.Email, user.Email! },
             };
 
-            foreach (var role in await _userManager.GetRolesAsync(user))
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (roles.Any())
             {
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                claims.Add(ClaimTypes.Role, roles);
             }
 
             return claims;

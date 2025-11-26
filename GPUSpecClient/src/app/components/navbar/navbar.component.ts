@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthService } from '../../services/auth-service';
+import { takeUntil, Subject } from 'rxjs';
+import { UserPayload } from '../../interfaces/auth/user-payload';
 
 @Component({
   selector: 'app-navbar',
@@ -11,4 +14,34 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  private destroySubject = new Subject();
+  isLoggedIn: boolean = false;
+  user?: UserPayload | null;
+
+  constructor(private authService: AuthService, private router: Router) {
+    this.authService.authStatus
+      .pipe(takeUntil(this.destroySubject))
+      .subscribe((result) => {
+        this.isLoggedIn = result;
+      });
+
+    this.authService.user.subscribe((user) => {
+      this.user = user;
+    });
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isAuthenticated();
+  }
+
+  ngOnDestroy() {
+    this.destroySubject.next(true);
+    this.destroySubject.complete();
+  }
+}

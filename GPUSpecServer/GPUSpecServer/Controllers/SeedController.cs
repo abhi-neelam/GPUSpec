@@ -50,40 +50,42 @@ namespace GPUSpecServer.Controllers
                 
             var addedUserList = new List<ApplicationUser>();
             var email_Admin = "admin@email.com";
+            var username_Admin = "admin";
 
-            if (await _userManager.FindByNameAsync(email_Admin) == null)
+            if (await _userManager.FindByEmailAsync(email_Admin) == null)
             {
                 var user_Admin = new ApplicationUser()
                 {
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    UserName = email_Admin,
+                    UserName = username_Admin,
                     Email = email_Admin,
+                    EmailConfirmed = true,
+                    LockoutEnabled = false
                 };
 
                 await _userManager.CreateAsync(user_Admin, _configuration["DefaultPasswords:admin"]!);
                 await _userManager.AddToRoleAsync(user_Admin, role_RegisteredUser);
                 await _userManager.AddToRoleAsync(user_Admin, role_Administrator);
-
-                user_Admin.EmailConfirmed = true;
-                user_Admin.LockoutEnabled = false;
                 addedUserList.Add(user_Admin);
             }
 
             var email_User = "user@email.com";
-            if (await _userManager.FindByNameAsync(email_User) == null)
+            var username_User = "user";
+
+            if (await _userManager.FindByEmailAsync(email_User) == null)
             {
                 var user_User = new ApplicationUser()
                 {
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    UserName = email_User,
-                    Email = email_User
+                    UserName = username_User,
+                    Email = email_User,
+                    EmailConfirmed = true,
+                    LockoutEnabled = false
                 };
 
                 await _userManager.CreateAsync(user_User, _configuration["DefaultPasswords:user"]!);
                 await _userManager.AddToRoleAsync(user_User, role_RegisteredUser);
 
-                user_User.EmailConfirmed = true;
-                user_User.LockoutEnabled = false;
                 addedUserList.Add(user_User);
             }
 

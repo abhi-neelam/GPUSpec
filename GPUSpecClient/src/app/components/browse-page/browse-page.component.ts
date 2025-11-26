@@ -30,7 +30,7 @@ export class BrowsePageComponent {
       this.isLoading = true;
 
       this.http
-        .get<PagedResult<Listing>>(`${environment.baseUrl}/api/Listings`, {
+        .get<PagedResult<Listing>>(`${environment.baseUrl}api/Listings`, {
           params: params,
         })
         .subscribe({

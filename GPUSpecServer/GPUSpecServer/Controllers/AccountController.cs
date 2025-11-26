@@ -2,6 +2,8 @@
 using GPUSpecServer.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace GPUSpecServer.Controllers
@@ -27,18 +29,21 @@ namespace GPUSpecServer.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(ApiLoginRequestDTO loginRequest)
         {
-            var user = await _userManager.FindByNameAsync(loginRequest.Email);
+            var user = await _userManager.FindByEmailAsync(loginRequest.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginRequest.Password))
             {
                 return Unauthorized(new ApiLoginResultDTO()
                 {
                     Success = false,
-                    Message = "Invalid Email or Password."
+                    Message = "Invalid Email or Password"
                 });
             }
-                
-            var secToken = await _jwtHandler.GetTokenAsync(user);
-            var jwt = new JwtSecurityTokenHandler().WriteToken(secToken);
+
+            var secToken = await _jwtHandler.GetTokenDescriptorAsync(user);
+            var handler = new JsonWebTokenHandler();
+            handler.SetDefaultTimesOnTokenCreation = false;
+
+            var jwt = handler.CreateToken(secToken);
 
             return Ok(new ApiLoginResultDTO()
             {
