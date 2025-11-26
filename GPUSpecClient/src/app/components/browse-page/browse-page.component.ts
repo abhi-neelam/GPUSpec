@@ -7,6 +7,7 @@ import { FilterbarComponent } from '../filterbar/filterbar.component';
 import { Listing } from '../../interfaces/listing';
 import { PagedResult } from '../../interfaces/pagedresult';
 import { Observable } from 'rxjs';
+import { ListingSearchParams } from '../../interfaces/listingsearchparams';
 
 @Component({
   selector: 'app-browse-page',
@@ -23,22 +24,26 @@ export class BrowsePageComponent {
   ) {}
 
   data: PagedResult<Listing> | null = null;
+  isLoading = false;
 
   ngOnInit() {
-    var searchQuery = this.activatedRoute.snapshot.queryParamMap.get('q') || '';
-    console.log('query', searchQuery);
-    var url = `${environment.baseUrl}/api/Search`;
+    this.activatedRoute.queryParams.subscribe((params: any) => {
+      this.isLoading = true;
 
-    this.http
-      .get<PagedResult<Listing>>(url, {
-        params: { q: searchQuery },
-      })
-      .subscribe({
-        next: (result) => {
-          this.data = result;
-          console.log(this.data);
-        },
-        error: (error) => console.error(error),
-      });
+      this.http
+        .get<PagedResult<Listing>>(`${environment.baseUrl}/api/Listings`, {
+          params: params,
+        })
+        .subscribe({
+          next: (result) => {
+            this.data = result;
+            this.isLoading = false;
+          },
+          error: (error) => {
+            console.error(error);
+            this.isLoading = false;
+          },
+        });
+    });
   }
 }

@@ -2,6 +2,7 @@
 {
     public class ListingSearchParams
     {
+        public string? q { get; set; }
         public string? manufacturer {  get; set; }
         public string? architecture { get; set; }
         public string? generation { get; set; }

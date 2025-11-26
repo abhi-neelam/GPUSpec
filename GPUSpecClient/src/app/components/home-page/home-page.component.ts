@@ -32,7 +32,7 @@ export class HomePageComponent {
 
   onSubmit() {
     this.router.navigate(['/browse'], {
-      queryParams: { q: this.searchForm.controls['name'].value },
+      queryParams: { q: this.searchForm.controls['name'].value || '' },
     });
   }
 }

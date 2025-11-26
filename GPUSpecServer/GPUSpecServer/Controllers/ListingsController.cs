@@ -23,6 +23,11 @@ namespace GPUSpecServer.Controllers
         }
 
         private IQueryable<Listing> FilterQuery(IQueryable<Listing> query, ListingSearchParams searchParams) {
+            if (!string.IsNullOrEmpty(searchParams.q))
+            {
+                query = query.Where(l => l.manufacturer.ToLower().Contains(searchParams.q.ToLower()));
+            }
+
             if (!string.IsNullOrEmpty(searchParams.manufacturer)) {
                 query = query.Where(l => l.manufacturer.ToLower() == searchParams.manufacturer.ToLower());
             }
