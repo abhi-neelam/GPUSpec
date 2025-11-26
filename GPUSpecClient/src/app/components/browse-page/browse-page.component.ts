@@ -7,7 +7,6 @@ import { FilterbarComponent } from '../filterbar/filterbar.component';
 import { Listing } from '../../interfaces/listing';
 import { PagedResult } from '../../interfaces/pagedresult';
 import { Observable } from 'rxjs';
-import { ListingSearchParams } from '../../interfaces/listingsearchparams';
 
 @Component({
   selector: 'app-browse-page',

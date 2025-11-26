@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListingPageComponent } from './listing-page.component';
+import { GpulistingPageComponent } from './gpulisting-page.component';
 
-describe('ListingPageComponent', () => {
-  let component: ListingPageComponent;
-  let fixture: ComponentFixture<ListingPageComponent>;
+describe('GpulistingPageComponent', () => {
+  let component: GpulistingPageComponent;
+  let fixture: ComponentFixture<GpulistingPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListingPageComponent]
+      imports: [GpulistingPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ListingPageComponent);
+    fixture = TestBed.createComponent(GpulistingPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
