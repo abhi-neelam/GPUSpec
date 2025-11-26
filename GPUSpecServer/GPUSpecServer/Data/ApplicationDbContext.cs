@@ -122,9 +122,6 @@ namespace GPUSpecServer.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
         }
-
-        public DbSet<GPUSpecServer.DTOs.ListingDTO> ListingDTO { get; set; } = default!;
     }
 }
