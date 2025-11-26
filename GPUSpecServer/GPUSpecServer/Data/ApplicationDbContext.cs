@@ -1,12 +1,14 @@
 ﻿using CsvHelper;
 using GPUSpecServer.Data.Models;
 using GPUSpecServer.Helpers;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 
 namespace GPUSpecServer.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         IHostEnvironment environment;
         public ApplicationDbContext(IHostEnvironment environment) : base()
@@ -116,6 +118,13 @@ namespace GPUSpecServer.Data
                 context.SaveChanges();
             });
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+        }
+
         public DbSet<GPUSpecServer.DTOs.ListingDTO> ListingDTO { get; set; } = default!;
     }
 }
