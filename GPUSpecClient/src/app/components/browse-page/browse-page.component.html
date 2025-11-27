@@ -11,7 +11,12 @@
       subscriptSizing="dynamic"
     >
       <mat-label>Enter name of listing</mat-label>
-      <input matInput type="text" formControlName="name" />
+      <input
+        matInput
+        type="text"
+        [formControl]="qControl"
+        (keydown.enter)="onSubmit()"
+      />
 
       <button
         mat-mini-fab
@@ -19,6 +24,7 @@
         class="search_button"
         color="primary"
         type="submit"
+        (click)="onSubmit()"
       >
         <mat-icon>search</mat-icon>
       </button>
