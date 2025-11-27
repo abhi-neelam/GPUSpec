@@ -17,6 +17,11 @@ h3 {
   width: 100%;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
 .error-message {
   color: #f44336;
 }
