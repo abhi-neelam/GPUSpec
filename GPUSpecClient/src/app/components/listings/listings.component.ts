@@ -7,10 +7,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SelectOption } from '../../interfaces/selectoption';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { ListingTileComponent } from '../listing-tile/listing-tile.component';
 @Component({
   selector: 'app-listings',
   standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule, MatPaginatorModule],
+  imports: [
+    MatFormFieldModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    ListingTileComponent,
+  ],
   templateUrl: './listings.component.html',
   styleUrl: './listings.component.scss',
 })
