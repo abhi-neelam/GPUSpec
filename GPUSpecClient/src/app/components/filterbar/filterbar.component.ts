@@ -4,6 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SelectOption } from '../../interfaces/selectoption';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   rawArchitectures,
   rawManufacturers,
@@ -38,6 +39,15 @@ import {
   styleUrl: './filterbar.component.scss',
 })
 export class FilterbarComponent {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+
+  readonly minMemoryLimit = defaultMinMemorySize;
+  readonly maxMemoryLimit = defaultMaxMemorySize;
+  readonly minProcessLimit = defaultMinProcessSize;
+  readonly maxProcessLimit = defaultMaxProcessSize;
+  readonly minYearLimit = defaultMinReleaseYear;
+  readonly maxYearLimit = defaultMaxReleaseYear;
+
   selectedManufacturer: string = '';
   selectedArchitecture: string = '';
   selectedMemoryType: string = '';
@@ -66,24 +76,21 @@ export class FilterbarComponent {
     display: item,
   }));
 
-  get isMemorySizeChanged(): boolean {
-    return (
-      this.minMemorySize !== defaultMinMemorySize ||
-      this.maxMemorySize !== defaultMaxMemorySize
-    );
-  }
-
-  get isProcessSizeChanged(): boolean {
-    return (
-      this.minProcessSize !== defaultMinProcessSize ||
-      this.maxProcessSize !== defaultMaxProcessSize
-    );
-  }
-
-  get isReleaseYearChanged(): boolean {
-    return (
-      this.minReleaseYear !== defaultMinReleaseYear ||
-      this.maxReleaseYear !== defaultMaxReleaseYear
-    );
+  onSubmit() {
+    this.router.navigate(['/browse'], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        manufacturer: this.selectedManufacturer,
+        architecture: this.selectedArchitecture,
+        memory_type: this.selectedMemoryType,
+        min_memory_size: this.minMemorySize,
+        max_memory_size: this.maxMemorySize,
+        min_process_size: this.minProcessSize,
+        max_process_size: this.maxProcessSize,
+        min_release_year: this.minReleaseYear,
+        max_release_year: this.maxReleaseYear,
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 }
