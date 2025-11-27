@@ -1,13 +1,36 @@
-<div class="flex flex-row listings-bar">
-  <span>Showing 2 of 28 results</span>
-  <mat-form-field subscriptSizing="dynamic">
-    <mat-label>Select Sort Option</mat-label>
-    <mat-select [(value)]="selectedSortOption" (selectionChange)="onSubmit()">
-      @for (sortOption of sortOptions; track sortOption) {
-      <mat-option [value]="sortOption.value">{{
-        sortOption.display
-      }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+<div class="flex flex-column listings-container">
+  <div class="flex flex-row listings-bar">
+    @if (data) {
+    <span>
+      Showing {{ (data.pageIndex - 1) * data.pageSize + 1 }} -
+      {{
+        data.pageIndex * data.pageSize > data.totalCount
+          ? data.totalCount
+          : data.pageIndex * data.pageSize
+      }}
+      of {{ data.totalCount }} results
+    </span>
+    }
+    <mat-form-field subscriptSizing="dynamic">
+      <mat-label>Select Sort Option</mat-label>
+      <mat-select [(value)]="selectedSortOption" (selectionChange)="onSubmit()">
+        @for (sortOption of sortOptions; track sortOption) {
+        <mat-option [value]="sortOption.value">{{
+          sortOption.display
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+  @if (data) {
+  <mat-paginator
+    [length]="data.totalCount"
+    [pageSize]="data.pageSize"
+    [pageIndex]="data.pageIndex - 1"
+    [pageSizeOptions]="[5, 10, 25]"
+    (page)="onPageChange($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+  }
 </div>

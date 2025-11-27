@@ -89,6 +89,7 @@ export class FilterbarComponent {
         max_process_size: this.maxProcessSize,
         min_release_year: this.minReleaseYear,
         max_release_year: this.maxReleaseYear,
+        pageIndex: 1,
       },
       queryParamsHandling: 'merge',
     });

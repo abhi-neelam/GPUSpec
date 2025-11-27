@@ -4,3 +4,12 @@
   margin-right: 10px;
   align-items: center;
 }
+
+.listings-container {
+  justify-content: center;
+}
+
+mat-paginator {
+  display: flex;
+  justify-content: center;
+}

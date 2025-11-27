@@ -76,6 +76,7 @@ export class BrowsePageComponent {
       relativeTo: this.activatedRoute,
       queryParams: {
         q: queryText,
+        pageIndex: 1,
       },
       queryParamsHandling: 'merge',
     });

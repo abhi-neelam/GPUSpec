@@ -6,11 +6,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SelectOption } from '../../interfaces/selectoption';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-listings',
   standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule],
+  imports: [MatFormFieldModule, MatSelectModule, MatPaginatorModule],
   templateUrl: './listings.component.html',
   styleUrl: './listings.component.scss',
 })
@@ -25,11 +25,23 @@ export class ListingsComponent {
     { value: 'asc', display: 'Oldest First' },
   ];
 
+  onPageChange(event: PageEvent) {
+    this.router.navigate(['/browse'], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        pageIndex: event.pageIndex + 1,
+        pageSize: event.pageSize,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
   onSubmit() {
     this.router.navigate(['/browse'], {
       relativeTo: this.activatedRoute,
       queryParams: {
         orderBy: this.selectedSortOption,
+        pageIndex: 1,
       },
       queryParamsHandling: 'merge',
     });
