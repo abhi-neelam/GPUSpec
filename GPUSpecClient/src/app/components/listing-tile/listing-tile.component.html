@@ -1,5 +1,44 @@
-<a class="product-name">
-  {{ listing.product }}
-</a>
+<mat-card
+  class="listing-card"
+  appearance="outlined"
+  [routerLink]="['/gpulisting', listing.id]"
+>
+  <div class="card-content">
+    <div class="info-section">
+      <div class="header-row">
+        <div class="title-group">
+          <a
+            [routerLink]="['/gpulisting', listing.id]"
+            class="product-title"
+            (click)="$event.stopPropagation()"
+          >
+            {{ listing.product }}
+          </a>
+          <span class="generation-text">{{ listing.generation }} Series</span>
+        </div>
 
-<h3>{{ listing.generation }}</h3>
+        <a
+          mat-flat-button
+          color="primary"
+          class="manufacturer-btn"
+          [routerLink]="['/browse']"
+          [queryParams]="{ manufacturer: listing.manufacturer }"
+          (click)="$event.stopPropagation()"
+        >
+          {{ listing.manufacturer }}
+        </a>
+      </div>
+
+      <ul class="specs-list">
+        <li><strong>Architecture:</strong> {{ listing.architecture }}</li>
+        <li><strong>Chip:</strong> {{ listing.chip }}</li>
+        <li><strong>Memory:</strong> {{ listing.memory_size }} GB</li>
+        @if (listing.process_size) {
+        <li><strong>Process:</strong> {{ listing.process_size }}nm</li>
+        } @if (listing.release_date) {
+        <li><strong>Release Date:</strong> {{ listing.release_date }}</li>
+        }
+      </ul>
+    </div>
+  </div>
+</mat-card>

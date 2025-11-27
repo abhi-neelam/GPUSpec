@@ -1,0 +1,82 @@
+.listing-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+  cursor: pointer;
+}
+
+.listing-card:hover {
+  box-shadow: 0 8px 24px rgba(123, 31, 162, 0.25);
+  border-color: #7b1fa2;
+}
+
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.info-section {
+  width: 100%;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+  text-decoration: none;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+
+.product-title:hover {
+  color: #3f51b5;
+  text-decoration: underline;
+}
+
+.generation-text {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.manufacturer-btn {
+  height: 32px;
+  font-size: 0.8rem;
+  line-height: 32px;
+  border-radius: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.specs-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.specs-list li {
+  margin-bottom: 4px;
+}
+
+.specs-list strong {
+  color: #333;
+  font-weight: 600;
+}

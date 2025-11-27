@@ -61,6 +61,38 @@ export class FilterbarComponent {
   minReleaseYear: number = defaultMinReleaseYear;
   maxReleaseYear: number = defaultMaxReleaseYear;
 
+  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.selectedManufacturer = params['manufacturer'] || '';
+      this.selectedArchitecture = params['architecture'] || '';
+      this.selectedMemoryType = params['memory_type'] || '';
+
+      this.minMemorySize = params['min_memory_size']
+        ? Number(params['min_memory_size'])
+        : this.minMemoryLimit;
+
+      this.maxMemorySize = params['max_memory_size']
+        ? Number(params['max_memory_size'])
+        : this.maxMemoryLimit;
+
+      this.minProcessSize = params['min_process_size']
+        ? Number(params['min_process_size'])
+        : this.minProcessLimit;
+
+      this.maxProcessSize = params['max_process_size']
+        ? Number(params['max_process_size'])
+        : this.maxProcessLimit;
+
+      this.minReleaseYear = params['min_release_year']
+        ? Number(params['min_release_year'])
+        : this.minYearLimit;
+
+      this.maxReleaseYear = params['max_release_year']
+        ? Number(params['max_release_year'])
+        : this.maxYearLimit;
+    });
+  }
+
   manufacturers: SelectOption[] = rawManufacturers.map((item) => ({
     value: item === defaultManufacturer ? '' : item,
     display: item,

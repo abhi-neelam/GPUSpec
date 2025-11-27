@@ -1,3 +1,23 @@
+.mat-mdc-flat-button.mat-primary:hover,
+.mat-mdc-raised-button.mat-primary:hover {
+  background-color: #ffd740 !important;
+  color: black !important;
+}
+
+.mdc-button.mat-primary:hover {
+  background-color: #ffd740 !important;
+  color: black !important;
+}
+
+.mdc-fab.mat-primary:hover {
+  background-color: #ffd740 !important;
+  color: black !important;
+}
+
+.brand-text:hover {
+  color: #ffd740 !important;
+}
+
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 html,
