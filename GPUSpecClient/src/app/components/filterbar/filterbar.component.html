@@ -1,6 +1,6 @@
 <div class="flex flex-column filter-container">
   <h4><strong>Manufacturer</strong></h4>
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label>Select Manufacturer</mat-label>
     <mat-select [(value)]="selectedManufacturer" (selectionChange)="onSubmit()">
       @for (manufacturer of manufacturers; track manufacturer) {
@@ -12,7 +12,7 @@
   </mat-form-field>
 
   <h4><strong>Architecture</strong></h4>
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label>Select Architecture</mat-label>
     <mat-select [(value)]="selectedArchitecture" (selectionChange)="onSubmit()">
       @for (architecture of architectures; track architecture) {
@@ -24,7 +24,7 @@
   </mat-form-field>
 
   <h4><strong>Memory Type</strong></h4>
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label>Select Memory Type</mat-label>
     <mat-select [(value)]="selectedMemoryType" (selectionChange)="onSubmit()">
       @for (memoryType of memoryTypes; track memoryType) {
