@@ -25,3 +25,13 @@ h1 {
 .spacing {
   flex-grow: 1;
 }
+
+.listings-root {
+  flex-grow: 4;
+  padding: 10px;
+}
+
+.filterbar-root {
+  flex-grow: 0;
+  padding: 10px;
+}

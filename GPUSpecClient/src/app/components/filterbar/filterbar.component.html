@@ -1,1 +1,23 @@
-<p>filterbar works!</p>
+<h4><strong>Manufacturer</strong></h4>
+<mat-form-field>
+  <mat-label>Select Manufacturer</mat-label>
+  <mat-select>
+    @for (manufacturer of manufacturers; track manufacturer) {
+    <mat-option [value]="manufacturer.value">{{
+      manufacturer.display
+    }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<h4><strong>Architecture</strong></h4>
+<mat-form-field>
+  <mat-label>Select Architecture</mat-label>
+  <mat-select>
+    @for (architecture of architectures; track architecture) {
+    <mat-option [value]="architecture.value">{{
+      architecture.display
+    }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

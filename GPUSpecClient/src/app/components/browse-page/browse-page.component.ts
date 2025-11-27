@@ -15,6 +15,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ListingsComponent } from '../listings/listings.component';
+import { FilterbarComponent } from '../filterbar/filterbar.component';
 
 @Component({
   selector: 'app-browse-page',
@@ -25,6 +27,8 @@ import {
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    ListingsComponent,
+    FilterbarComponent,
   ],
   templateUrl: './browse-page.component.html',
   styleUrl: './browse-page.component.scss',
