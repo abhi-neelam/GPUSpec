@@ -1,0 +1,43 @@
+<div class="page-container">
+  <h1>My Favorites</h1>
+
+  @if (isLoading) {
+  <div class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+  } @else if (favorites.length === 0) {
+  <div class="empty-state">
+    <mat-icon>favorite_border</mat-icon>
+    <p>You haven't added any favorites yet.</p>
+    <a mat-raised-button color="primary" routerLink="/browse">Browse GPUs</a>
+  </div>
+  } @else {
+  <div class="favorites-list">
+    @for (fav of favorites; track fav.id) {
+    <a class="favorite-card" [routerLink]="['/gpulisting', fav.id]">
+      <div class="card-content">
+        <div class="card-info">
+          <div class="badges">
+            <span class="badge manufacturer-badge">
+              {{ fav.manufacturer }}
+            </span>
+          </div>
+          <h2 class="product-name">{{ fav.product }}</h2>
+          <p class="generation-name">{{ fav.generation }} Series</p>
+        </div>
+        <div class="card-actions">
+          <button
+            mat-icon-button
+            class="remove-favorite-btn"
+            (click)="onRemoveFavorite($event, fav.id)"
+            matTooltip="Remove from favorites"
+          >
+            <mat-icon class="is-favorite">favorite</mat-icon>
+          </button>
+        </div>
+      </div>
+    </a>
+    }
+  </div>
+  }
+</div>

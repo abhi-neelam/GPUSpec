@@ -28,7 +28,10 @@
   </div>
   <div class="flex flex-column listings-items">
     @if (data) { @for (listing of data.data; track listing) {
-    <app-listing-tile [listing]="listing"></app-listing-tile>
+    <app-listing-tile
+      [listing]="listing"
+      [isFavorite]="hasFavorite(listing.id)"
+    ></app-listing-tile>
     } }
   </div>
   <mat-paginator

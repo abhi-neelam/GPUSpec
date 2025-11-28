@@ -5,17 +5,30 @@
   </div>
   } @else if (data) {
   <div class="header-section">
-    <div class="badges">
-      <a
-        [routerLink]="['/browse']"
-        [queryParams]="{ manufacturer: data.manufacturer }"
-        class="badge manufacturer-badge"
-      >
-        {{ data.manufacturer }}
-      </a>
+    <div class="header-content">
+      <div class="badges">
+        <a
+          [routerLink]="['/browse']"
+          [queryParams]="{ manufacturer: data.manufacturer }"
+          class="badge manufacturer-badge"
+        >
+          {{ data.manufacturer }}
+        </a>
+      </div>
+      <h1>{{ data.product.name }}</h1>
+      <h2 class="generation-name">{{ data.generation }} Series</h2>
     </div>
-    <h1>{{ data.product.name }}</h1>
-    <h2 class="chip-name">{{ data.generation }}</h2>
+    <div class="header-actions">
+      <button
+        mat-icon-button
+        class="big-favorite-btn"
+        (click)="onToggleFavorite()"
+      >
+        <mat-icon [class.is-favorite]="isFavorite">
+          {{ isFavorite ? "favorite" : "favorite_border" }}
+        </mat-icon>
+      </button>
+    </div>
   </div>
 
   <div class="hero-stats-grid">
@@ -168,7 +181,7 @@
           </div>
           <div class="spec-row">
             <span class="label">Boost Clock</span>
-            <span class="value">{{
+            <span class="value highlight-text">{{
               data.boost_clock ? data.boost_clock + " MHz" : "None"
             }}</span>
           </div>
@@ -214,7 +227,7 @@
 
       <div class="content-card">
         <div class="card-header">
-          <mat-icon>bar_chart</mat-icon>
+          <mat-icon class="accent-icon">bar_chart</mat-icon>
           <h3>Theoretical Performance</h3>
         </div>
         <div class="spec-list">
@@ -232,7 +245,7 @@
           </div>
           <div class="spec-row">
             <span class="label">FP32 (Float)</span>
-            <span class="value">{{
+            <span class="value highlight-text">{{
               data.fp32 ? data.fp32 + " TFLOPS" : "None"
             }}</span>
           </div>

@@ -6,11 +6,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from '../../services/auth-service';
 import { takeUntil, Subject } from 'rxjs';
 import { UserPayload } from '../../interfaces/auth/user-payload';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, MatToolbarModule, MatIconModule, MatButtonModule],
+  imports: [
+    RouterLink,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule,
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -19,7 +26,11 @@ export class NavbarComponent {
   isLoggedIn: boolean = false;
   user?: UserPayload | null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.authService.authStatus
       .pipe(takeUntil(this.destroySubject))
       .subscribe((result) => {
@@ -33,6 +44,9 @@ export class NavbarComponent {
 
   onLogout(): void {
     this.authService.logout();
+    this.snackBar.open('Logged out', undefined, {
+      duration: 2000,
+    });
     this.router.navigate(['/']);
   }
 

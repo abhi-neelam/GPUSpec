@@ -17,16 +17,28 @@
           <span class="generation-text">{{ listing.generation }} Series</span>
         </div>
 
-        <a
-          mat-flat-button
-          color="primary"
-          class="manufacturer-btn"
-          [routerLink]="['/browse']"
-          [queryParams]="{ manufacturer: listing.manufacturer }"
-          (click)="$event.stopPropagation()"
-        >
-          {{ listing.manufacturer }}
-        </a>
+        <div class="actions-group">
+          <a
+            mat-flat-button
+            color="primary"
+            class="manufacturer-btn"
+            [routerLink]="['/browse']"
+            [queryParams]="{ manufacturer: listing.manufacturer }"
+            (click)="$event.stopPropagation()"
+          >
+            {{ listing.manufacturer }}
+          </a>
+
+          <button
+            mat-icon-button
+            class="favorite-btn"
+            (click)="onToggleFavorite($event)"
+          >
+            <mat-icon [class.is-favorite]="isFavorite">
+              {{ isFavorite ? "favorite" : "favorite_border" }}
+            </mat-icon>
+          </button>
+        </div>
       </div>
 
       <ul class="specs-list">

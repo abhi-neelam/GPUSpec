@@ -26,6 +26,7 @@ namespace GPUSpecServer.Data
         public DbSet<Chip> Chips { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Listing> Listings { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

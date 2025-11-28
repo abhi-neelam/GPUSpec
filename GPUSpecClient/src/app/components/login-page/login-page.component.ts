@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
 import { LoginRequest } from '../../interfaces/auth/login-request';
 import { LoginResult } from '../../interfaces/auth/login-result';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-page',
@@ -22,6 +23,7 @@ import { LoginResult } from '../../interfaces/auth/login-result';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSnackBarModule,
     RouterLink,
   ],
   templateUrl: './login-page.component.html',
@@ -32,7 +34,8 @@ export class LoginPageComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   loginForm = new FormGroup({
@@ -65,6 +68,9 @@ export class LoginPageComponent {
       next: (result) => {
         this.loginResult = result;
         if (result.success) {
+          this.snackBar.open('Logged in', undefined, {
+            duration: 2000,
+          });
           this.router.navigate(['/']);
         }
       },

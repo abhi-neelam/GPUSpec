@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ListingTileComponent } from '../listing-tile/listing-tile.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthService } from '../../services/auth-service';
+import { FavoritesService } from '../../services/favorites-service';
 
 @Component({
   selector: 'app-listings',
@@ -24,16 +26,34 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrl: './listings.component.scss',
 })
 export class ListingsComponent {
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    private favService: FavoritesService
+  ) {}
 
   @Input({ required: true }) data: PagedResult<Listing> | null = null;
   @Input({ required: true }) isLoading = false;
   selectedSortOption: string = 'desc';
+  favorites: Listing[] = [];
 
   sortOptions: SelectOption[] = [
     { value: 'desc', display: 'Newest First' },
     { value: 'asc', display: 'Oldest First' },
   ];
+
+  ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.favService.getFavorites().subscribe((data) => {
+        this.favorites = data;
+      });
+    }
+  }
+
+  hasFavorite(listingId: number): boolean {
+    return this.favorites.some((f) => f.id === listingId);
+  }
 
   onPageChange(event: PageEvent) {
     this.router.navigate(['/browse'], {
