@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { GPUListing } from '../../interfaces/gpulisting';
 import { PagedResult } from '../../interfaces/pagedresult';
 import { Observable } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-gpulisting-page',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, MatProgressSpinnerModule, MatIconModule],
   templateUrl: './gpulisting-page.component.html',
   styleUrl: './gpulisting-page.component.scss',
 })

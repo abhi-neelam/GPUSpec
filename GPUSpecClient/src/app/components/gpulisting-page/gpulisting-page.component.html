@@ -1,1 +1,378 @@
-<p>gpulisting-page works!</p>
+<div class="page-container">
+  @if (isLoading) {
+  <div class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+  } @else if (data) {
+  <div class="header-section">
+    <div class="badges">
+      <a
+        [routerLink]="['/browse']"
+        [queryParams]="{ manufacturer: data.manufacturer }"
+        class="badge manufacturer-badge"
+      >
+        {{ data.manufacturer }}
+      </a>
+    </div>
+    <h1>{{ data.product.name }}</h1>
+    <h2 class="chip-name">{{ data.generation }}</h2>
+  </div>
+
+  <div class="hero-stats-grid">
+    <div class="hero-card">
+      <div class="hero-icon">
+        <mat-icon>memory</mat-icon>
+      </div>
+      <div class="hero-data">
+        <span class="hero-value">{{ data.memory_size }} GB</span>
+        <span class="hero-label">{{ data.memory_type }}</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-icon">
+        <mat-icon>speed</mat-icon>
+      </div>
+      <div class="hero-data">
+        <span class="hero-value">{{ data.boost_clock }} MHz</span>
+        <span class="hero-label">Boost Clock</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-icon">
+        <mat-icon>bolt</mat-icon>
+      </div>
+      <div class="hero-data">
+        <span class="hero-value">{{ data.tdp || "N/A" }} W</span>
+        <span class="hero-label">TDP</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-icon">
+        <mat-icon>developer_board</mat-icon>
+      </div>
+      <div class="hero-data">
+        <span class="hero-value">{{ data.chip.process_size || "?" }} nm</span>
+        <span class="hero-label">{{ data.chip.foundry || "Process" }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div class="col-left">
+      <div class="content-card">
+        <div class="card-header">
+          <mat-icon>settings_input_component</mat-icon>
+          <h3>Graphics Processor</h3>
+        </div>
+        <div class="spec-list">
+          <div class="spec-row">
+            <span class="label">Architecture</span>
+            <span class="value">{{ data.architecture || "None" }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Foundry</span>
+            <span class="value">{{ data.chip.foundry || "None" }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Process Size</span>
+            <span class="value">{{
+              data.chip.process_size ? data.chip.process_size + " nm" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Transistors</span>
+            <span class="value">{{
+              data.chip.transistors
+                ? data.chip.transistors +
+                  "
+              Million"
+                : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Density</span>
+            <span class="value">{{
+              data.chip.density ? data.chip.density + " M/mm²" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Die Size</span>
+            <span class="value">{{
+              data.chip.die_size ? data.chip.die_size + " mm²" : "None"
+            }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header">
+          <mat-icon>grid_view</mat-icon>
+          <h3>Render Configuration</h3>
+        </div>
+        <div class="spec-list">
+          <div class="spec-row">
+            <span class="label">Shading Units</span>
+            <span class="value">{{ data.shading_units || "None" }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">TMUs</span>
+            <span class="value">{{ data.tmus || "None" }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">ROPs</span>
+            <span class="value">{{ data.rops || "None" }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">SM Count</span>
+            <span class="value">{{ data.smus || "None" }}</span>
+          </div>
+          @if (data.product.tensor_cores) {
+          <div class="spec-row">
+            <span class="label">Tensor Cores</span>
+            <span class="value">{{ data.product.tensor_cores }}</span>
+          </div>
+          } @if (data.product.rt_cores) {
+          <div class="spec-row">
+            <span class="label">RT Cores</span>
+            <span class="value">{{ data.product.rt_cores }}</span>
+          </div>
+          }
+          <div class="spec-row">
+            <span class="label">L1 Cache</span>
+            <span class="value">{{
+              data.l1_cache ? data.l1_cache + " KB" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">L2 Cache</span>
+            <span class="value">{{
+              data.l2_cache ? data.l2_cache + " MB" : "None"
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <div class="content-card">
+        <div class="card-header">
+          <mat-icon>speed</mat-icon>
+          <h3>Clock Speeds</h3>
+        </div>
+        <div class="spec-list">
+          <div class="spec-row">
+            <span class="label">Base Clock</span>
+            <span class="value">{{
+              data.base_clock ? data.base_clock + " MHz" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Boost Clock</span>
+            <span class="value">{{
+              data.boost_clock ? data.boost_clock + " MHz" : "None"
+            }}</span>
+          </div>
+          @if (data.memory_clock) {
+          <div class="spec-row">
+            <span class="label">Memory Clock</span>
+            <span class="value">{{ data.memory_clock }} MHz</span>
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header">
+          <mat-icon>storage</mat-icon>
+          <h3>Memory</h3>
+        </div>
+        <div class="spec-list">
+          <div class="spec-row">
+            <span class="label">Memory Size</span>
+            <span class="value">{{
+              data.memory_size ? data.memory_size + " GB" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Memory Type</span>
+            <span class="value">{{ data.memory_type || "None" }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Memory Bus</span>
+            <span class="value">{{
+              data.memory_bus ? data.memory_bus + " bit" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Bandwidth</span>
+            <span class="value">{{
+              data.memory_bandwidth ? data.memory_bandwidth + " GB/s" : "None"
+            }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header">
+          <mat-icon>bar_chart</mat-icon>
+          <h3>Theoretical Performance</h3>
+        </div>
+        <div class="spec-list">
+          <div class="spec-row">
+            <span class="label">Pixel Rate</span>
+            <span class="value">{{
+              data.pixel_rate ? data.pixel_rate + " GPixel/s" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">Texture Rate</span>
+            <span class="value">{{
+              data.texture_rate ? data.texture_rate + " GTexel/s" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">FP32 (Float)</span>
+            <span class="value">{{
+              data.fp32 ? data.fp32 + " TFLOPS" : "None"
+            }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="label">FP64 (Double)</span>
+            <span class="value">{{
+              data.fp64 ? data.fp64 + " GFLOPS" : "None"
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-width-section">
+    <div class="content-card">
+      <div class="card-header">
+        <mat-icon>straighten</mat-icon>
+        <h3>Physical Dimensions & Power</h3>
+      </div>
+      <div class="physical-grid">
+        <div class="physical-item">
+          <span class="p-label">Length</span>
+          <span class="p-value">{{
+            data.board_length ? data.board_length + " mm" : "None"
+          }}</span>
+        </div>
+        <div class="physical-item">
+          <span class="p-label">Width</span>
+          <span class="p-value">{{
+            data.board_width ? data.board_width + " mm" : "None"
+          }}</span>
+        </div>
+        <div class="physical-item">
+          <span class="p-label">Slot Width</span>
+          <span class="p-value">{{ data.board_slot_width || "None" }}</span>
+        </div>
+        <div class="physical-item">
+          <span class="p-label">TDP</span>
+          <span class="p-value">{{ data.tdp ? data.tdp + " W" : "None" }}</span>
+        </div>
+        <div class="physical-item">
+          <span class="p-label">Suggested PSU</span>
+          <span class="p-value">{{
+            data.suggested_psu ? data.suggested_psu + " W" : "None"
+          }}</span>
+        </div>
+        <div class="physical-item">
+          <span class="p-label">Power Connectors</span>
+          <span class="p-value">{{ data.power_connectors || "None" }}</span>
+        </div>
+        <div class="physical-item full-span">
+          <span class="p-label">Outputs</span>
+          <span class="p-value">{{ data.display_connectors || "None" }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-width-section">
+    <div class="content-card">
+      <div class="card-header">
+        <mat-icon>code</mat-icon>
+        <h3>API Support</h3>
+      </div>
+      <div class="api-grid">
+        <div class="api-card">
+          <span class="api-name">DirectX</span>
+          <span class="api-version">
+            {{
+              data.chip.directx_major_version
+                ? data.chip.directx_major_version +
+                  "." +
+                  data.chip.directx_minor_version
+                : "None"
+            }}
+          </span>
+        </div>
+        <div class="api-card">
+          <span class="api-name">OpenGL</span>
+          <span class="api-version">
+            {{
+              data.chip.opengl_major_version
+                ? data.chip.opengl_major_version +
+                  "." +
+                  data.chip.opengl_minor_version
+                : "None"
+            }}
+          </span>
+        </div>
+        <div class="api-card">
+          <span class="api-name">OpenCL</span>
+          <span class="api-version">
+            {{
+              data.chip.opencl_major_version
+                ? data.chip.opencl_major_version +
+                  "." +
+                  data.chip.opencl_minor_version
+                : "None"
+            }}
+          </span>
+        </div>
+        <div class="api-card">
+          <span class="api-name">Vulkan</span>
+          <span class="api-version">
+            {{
+              data.chip.vulkan_major_version
+                ? data.chip.vulkan_major_version +
+                  "." +
+                  data.chip.vulkan_minor_version
+                : "None"
+            }}
+          </span>
+        </div>
+        <div class="api-card">
+          <span class="api-name">CUDA</span>
+          <span class="api-version">
+            {{
+              data.chip.cuda_major_version
+                ? data.chip.cuda_major_version +
+                  "." +
+                  data.chip.cuda_minor_version
+                : "None"
+            }}
+          </span>
+        </div>
+        <div class="api-card">
+          <span class="api-name">Shader Model</span>
+          <span class="api-version">
+            {{
+              data.chip.shader_model_major_version
+                ? data.chip.shader_model_major_version +
+                  "." +
+                  data.chip.shader_model_minor_version
+                : "None"
+            }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
