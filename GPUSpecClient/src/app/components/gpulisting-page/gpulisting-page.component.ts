@@ -23,7 +23,7 @@ export class GPUListingPageComponent {
   ) {}
 
   data: GPUListing | null = null;
-  isLoading = false;
+  isLoading = true;
 
   ngOnInit() {
     var idParam: string = this.activatedRoute.snapshot.paramMap.get('id')!;

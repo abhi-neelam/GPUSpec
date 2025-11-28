@@ -1,6 +1,10 @@
 <div class="flex flex-column listings-container">
+  @if (isLoading) {
+  <div class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+  }@else if (data) {
   <div class="flex flex-row listings-bar">
-    @if (data) {
     <span>
       Showing {{ (data.pageIndex - 1) * data.pageSize + 1 }} -
       {{
@@ -10,7 +14,7 @@
       }}
       of {{ data.totalCount }} results
     </span>
-    }
+
     <mat-form-field subscriptSizing="dynamic">
       <mat-label>Select Sort Option</mat-label>
       <mat-select [(value)]="selectedSortOption" (selectionChange)="onSubmit()">
@@ -27,7 +31,6 @@
     <app-listing-tile [listing]="listing"></app-listing-tile>
     } }
   </div>
-  @if (data) {
   <mat-paginator
     [length]="data.totalCount"
     [pageSize]="data.pageSize"

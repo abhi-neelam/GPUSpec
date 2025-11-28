@@ -9,6 +9,13 @@
   justify-content: center;
 }
 
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
 mat-paginator {
   display: flex;
   justify-content: center;
