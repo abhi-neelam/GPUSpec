@@ -12,7 +12,7 @@ import { AuthService } from './services/auth-service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'GPUSpecClient';
+  title = 'GPUSpec';
 
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
