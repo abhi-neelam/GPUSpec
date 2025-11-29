@@ -1,66 +1,486 @@
-.mat-mdc-flat-button.mat-primary:hover,
-.mat-mdc-raised-button.mat-primary:hover {
-  background-color: #ffd740 !important;
-  color: black !important;
+@use "@angular/material" as mat;
+
+$custom-indigo-palette: (
+  50: #e8eaf6,
+  100: #c5cae9,
+  200: #9fa8da,
+  300: #7986cb,
+  400: #5c6bc0,
+  500: #3f51b5,
+  600: #3949ab,
+  700: #303f9f,
+  800: #283593,
+  900: #1a237e,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$my-primary: mat.define-palette($custom-indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$amber-palette, A400);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.core();
+@include mat.all-component-themes($my-theme);
+
+.mat-toolbar.mat-primary {
+  background-color: #3f51b5 !important;
+  color: #ffffff !important;
 }
 
+.mat-mdc-flat-button.mat-primary:hover,
+.mat-mdc-raised-button.mat-primary:hover,
+.mat-mdc-fab.mat-primary:hover,
+.mat-mdc-mini-fab.mat-primary:hover,
 .mdc-button.mat-primary:hover {
   background-color: #ffd740 !important;
   color: black !important;
-}
-
-.mdc-fab.mat-primary:hover {
-  background-color: #ffd740 !important;
-  color: black !important;
+  --mdc-filled-button-container-color: #ffd740 !important;
+  --mat-mdc-fab-color: #ffd740 !important;
 }
 
 .brand-text:hover {
   color: #ffd740 !important;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
-
-.manufacturer-badge:hover {
-  color: #ffd740 !important;
-}
-
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f7fa;
+  color: #424242;
+}
+
+h1,
+h2,
+h3,
+.product-name {
+  color: #1a237e !important;
+  font-weight: 800;
+}
+
+.spec-row .value {
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+.spec-row .label,
+.generation-name,
+p {
+  color: #546e7a !important;
+}
+
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  font-family: "Roboto", system-ui, sans-serif;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.badges {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.manufacturer-badge {
+  background-color: #3f51b5;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.manufacturer-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.brand-nvidia {
+  background-color: #76b900 !important;
+  color: white !important;
+  border: none;
+}
+.brand-amd {
+  background-color: #ed1c24 !important;
+  color: white !important;
+  border: none;
+}
+.brand-intel {
+  background-color: #0071c5 !important;
+  color: white !important;
+  border: none;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  color: #1a237e;
+  letter-spacing: -0.5px;
+}
+
+.generation-name {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #546e7a;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.big-favorite-btn {
+  border: none !important;
+  background: transparent;
+  transform: scale(1.2);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s;
+}
+
+.big-favorite-btn:hover {
+  transform: scale(1.4);
+  background-color: rgba(255, 64, 129, 0.1) !important;
+}
+
+.big-favorite-btn:active {
+  transform: scale(0.95);
+}
+
+.big-favorite-btn mat-icon {
+  color: #b0bec5;
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  transition: color 0.2s;
+}
+
+.big-favorite-btn:hover mat-icon {
+  color: #ff80ab;
+}
+
+.big-favorite-btn mat-icon.is-favorite {
+  color: #f50057;
+}
+
+.big-favorite-btn:hover mat-icon.is-favorite {
+  color: #c51162;
+}
+
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.hero-card {
+  background: white;
+  border: 1px solid #e8eaf6;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: default;
+}
+
+.hero-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(63, 81, 181, 0.15);
+  border-color: #3f51b5;
+}
+
+.hero-icon {
+  width: 56px;
+  height: 56px;
+  background-color: #e8eaf6;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-icon mat-icon {
+  color: #3f51b5;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.hero-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a237e;
+}
+
+.hero-label {
+  font-size: 0.9rem;
+  color: #546e7a;
+  font-weight: 500;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col-left,
+.col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.content-card {
+  background: white;
+  border: 1px solid #e8eaf6;
+  border-radius: 12px;
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.content-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(63, 81, 181, 0.15);
+  border-color: #3f51b5;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8eaf6;
+}
+
+.card-header mat-icon {
+  color: #3f51b5;
+}
+
+.card-header mat-icon.accent-icon {
+  color: #3f51b5;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1a237e;
+  font-weight: 600;
+}
+
+.spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted #e8eaf6;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.spec-row .label {
+  color: #546e7a;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.spec-row .value {
+  color: #000000;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.highlight-text {
+  color: #000000;
+}
+
+.full-width-section {
+  margin-bottom: 24px;
+}
+
+.physical-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .physical-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.physical-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.physical-item.full-span {
+  grid-column: 1 / -1;
+  padding-top: 12px;
+  border-top: 1px dashed #e8eaf6;
+}
+
+.p-label {
+  font-size: 0.85rem;
+  color: #7986cb;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.p-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+.api-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.api-card {
+  border: 1px solid #e8eaf6;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.api-card:hover {
+  border-color: #3f51b5;
+  box-shadow: 0 4px 6px -1px rgba(63, 81, 181, 0.1);
+}
+
+.api-name {
+  font-size: 0.9rem;
+  color: #000000;
+  font-weight: 600;
+}
+
+.api-version {
+  display: inline-block;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.api-card:hover .api-version {
+  color: #ffd740;
 }
 
 .flex {
   display: flex;
   gap: 8px;
 }
-
 .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .flex-column {
   flex-direction: column;
 }
-
 .flex-row {
   flex-direction: row;
 }
-
 .max-width {
   width: 100%;
 }
-
 .transparent-button {
   background-color: transparent;
   border: none;
 }
-
 button {
   border-radius: 4px;
 }
