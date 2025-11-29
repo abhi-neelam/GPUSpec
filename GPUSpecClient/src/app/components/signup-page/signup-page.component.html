@@ -5,14 +5,6 @@
     </h3>
 
     <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input type="text" matInput formControlName="username" />
-      @if (signupForm.get('username')?.hasError('required')) {
-      <mat-error>Username is required</mat-error>
-      }
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input
         type="email"
@@ -27,15 +19,51 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <mat-label>Password</mat-label>
       <input type="password" matInput formControlName="password" />
-      @if (signupForm.get('password')?.hasError('required')) {
+      @if (signupForm.get('password')?.touched &&
+      signupForm.get('password')?.hasError('required')) {
       <mat-error>Password is required</mat-error>
       }
     </mat-form-field>
+
+    <div class="password-requirements">
+      <div class="req-section">
+        <span class="req-title">Must contain:</span>
+        <div class="req-chips">
+          <div class="req-chip" [class.valid]="hasUpperCase">
+            <mat-icon>check_circle</mat-icon> ABC
+          </div>
+          <div class="req-chip" [class.valid]="hasLowerCase">
+            <mat-icon>check_circle</mat-icon> abc
+          </div>
+          <div class="req-chip" [class.valid]="hasDigit">
+            <mat-icon>check_circle</mat-icon> 123
+          </div>
+          <div class="req-chip" [class.valid]="hasSpecialChar">
+            <mat-icon>check_circle</mat-icon> &#64;#$
+          </div>
+        </div>
+      </div>
+
+      <div class="req-section last-section">
+        <span class="req-title">Length:</span>
+        <div class="req-chips">
+          <div class="req-chip" [class.valid]="hasMinLength">
+            <mat-icon>check_circle</mat-icon> 6+ Chars
+          </div>
+        </div>
+      </div>
+    </div>
+    @if (signupResult && !signupResult.success) {
+    <div class="server-error">
+      {{ signupResult.message }}
+    </div>
+    }
+
     <button
-      class="button"
+      class="sign-up button"
       mat-flat-button
       color="primary"
       (click)="submit()"

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,8 +27,9 @@ export class NavbarComponent {
   user?: UserPayload | null;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private authService: AuthService,
-    private router: Router,
+    public router: Router,
     private snackBar: MatSnackBar
   ) {
     this.authService.authStatus
@@ -47,7 +48,7 @@ export class NavbarComponent {
     this.snackBar.open('Logged out', undefined, {
       duration: 2000,
     });
-    this.router.navigate(['/']);
+    window.location.reload();
   }
 
   ngOnInit(): void {

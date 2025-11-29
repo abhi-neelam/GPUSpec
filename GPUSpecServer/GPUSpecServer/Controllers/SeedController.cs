@@ -50,14 +50,13 @@ namespace GPUSpecServer.Controllers
                 
             var addedUserList = new List<ApplicationUser>();
             var email_Admin = "admin@email.com";
-            var username_Admin = "admin";
 
             if (await _userManager.FindByEmailAsync(email_Admin) == null)
             {
                 var user_Admin = new ApplicationUser()
                 {
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    UserName = username_Admin,
+                    UserName = email_Admin,
                     Email = email_Admin,
                     EmailConfirmed = true,
                     LockoutEnabled = false
@@ -70,14 +69,13 @@ namespace GPUSpecServer.Controllers
             }
 
             var email_User = "user@email.com";
-            var username_User = "user";
 
             if (await _userManager.FindByEmailAsync(email_User) == null)
             {
                 var user_User = new ApplicationUser()
                 {
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    UserName = username_User,
+                    UserName = email_User,
                     Email = email_User,
                     EmailConfirmed = true,
                     LockoutEnabled = false

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +20,7 @@ export class ListingTileComponent {
   @Input() isFavorite = false;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private favService: FavoritesService,
     private authService: AuthService,
     private router: Router,
@@ -29,8 +30,16 @@ export class ListingTileComponent {
   onToggleFavorite(e: Event) {
     e.stopPropagation();
 
+    let snapshot = this.router.routerState.snapshot;
+
     if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login'], {
+        relativeTo: this.activatedRoute,
+        queryParams: {
+          returnUrl: snapshot.url,
+        },
+        queryParamsHandling: 'merge',
+      });
       return;
     }
 

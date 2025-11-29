@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, tap, Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
-import { LoginResult } from '../interfaces/auth/login-result';
 import { LoginRequest } from '../interfaces/auth/login-request';
+import { LoginResult } from '../interfaces/auth/login-result';
+import { SignupRequest } from '../interfaces/auth/signup-request';
+import { SignupResult } from '../interfaces/auth/signup-result';
 import { UserPayload } from '../interfaces/auth/user-payload';
 import { jwtDecode } from 'jwt-decode';
 
@@ -48,6 +50,20 @@ export class AuthService {
           this.setAuthStatus(true);
           localStorage.setItem(this.tokenKey, loginResult.token);
           const decoded = jwtDecode<UserPayload>(loginResult.token);
+          this._user.next(decoded);
+        }
+      })
+    );
+  }
+
+  signup(item: SignupRequest): Observable<SignupResult> {
+    var url = `${environment.baseUrl}api/Account/Signup`;
+    return this.http.post<SignupResult>(url, item).pipe(
+      tap((signupResult) => {
+        if (signupResult.success && signupResult.token) {
+          this.setAuthStatus(true);
+          localStorage.setItem(this.tokenKey, signupResult.token);
+          const decoded = jwtDecode<UserPayload>(signupResult.token);
           this._user.next(decoded);
         }
       })

@@ -18,7 +18,12 @@
 
       <div class="nav-section right-section">
         @if (!isLoggedIn) {
-        <a mat-flat-button color="primary" [routerLink]="['/login']">
+        <a
+          mat-flat-button
+          color="primary"
+          [routerLink]="['/login']"
+          [queryParams]="{ returnUrl: router.url }"
+        >
           Sign In
         </a>
         } @else {

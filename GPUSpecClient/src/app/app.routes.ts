@@ -6,12 +6,25 @@ import { SignupPageComponent } from './components/signup-page/signup-page.compon
 import { GPUListingPageComponent } from './components/gpulisting-page/gpulisting-page.component';
 import { FavoritesPageComponent } from './components/favorites-page/favorites-page.component';
 import { AuthGuard } from './routeguards/auth-guard';
+import { LoggedInGuard } from './routeguards/logged-in-guard';
 
 export const routes: Routes = [
-  { path: 'browse', component: BrowsePageComponent, canActivate: [AuthGuard] },
-  { path: 'favorites', component: FavoritesPageComponent },
+  { path: 'browse', component: BrowsePageComponent },
+  {
+    path: 'favorites',
+    component: FavoritesPageComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'gpulisting/:id', component: GPUListingPageComponent },
-  { path: 'login', component: LoginPageComponent, pathMatch: 'full' },
-  { path: 'signup', component: SignupPageComponent, pathMatch: 'full' },
+  {
+    path: 'login',
+    component: LoginPageComponent,
+    canActivate: [LoggedInGuard],
+  },
+  {
+    path: 'signup',
+    component: SignupPageComponent,
+    canActivate: [LoggedInGuard],
+  },
   { path: '', component: HomePageComponent, pathMatch: 'full' },
 ];

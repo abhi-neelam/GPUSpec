@@ -52,5 +52,57 @@ namespace GPUSpecServer.Controllers
                 Token = jwt
             });
         }
+
+        [HttpPost("Signup")]
+        public async Task<IActionResult> Signup(ApiSignupRequestDTO signupRequest)
+        {
+            var user = await _userManager.FindByEmailAsync(signupRequest.Email);
+            if (user != null)
+            {
+                return Conflict(new ApiSignupResultDTO()
+                {
+                    Success = false,
+                    Message = "The email address already exists"
+                });
+            }
+
+            var user_User = new ApplicationUser()
+            {
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = signupRequest.Email,
+                Email = signupRequest.Email,
+                EmailConfirmed = true,
+                LockoutEnabled = false
+            };
+
+            var createResult = await _userManager.CreateAsync(user_User, signupRequest.Password);
+
+            if (!createResult.Succeeded)
+            {
+                var errors = string.Join(", ", createResult.Errors.Select(e => e.Description));
+
+                return BadRequest(new ApiSignupResultDTO
+                {
+                    Success = false,
+                    Message = $"Weak password {errors}"
+                });
+            }
+
+            string role_RegisteredUser = "registeredUser";
+            await _userManager.AddToRoleAsync(user_User, role_RegisteredUser);
+
+            var secToken = await _jwtHandler.GetTokenDescriptorAsync(user_User);
+            var handler = new JsonWebTokenHandler();
+            handler.SetDefaultTimesOnTokenCreation = false;
+
+            var jwt = handler.CreateToken(secToken);
+
+            return Created(string.Empty, new ApiLoginResultDTO()
+            {
+                Success = true,
+                Message = "Signup successful",
+                Token = jwt
+            });
+        }
     }
 }

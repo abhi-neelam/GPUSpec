@@ -1,5 +1,6 @@
 <div class="flex flex-row search_container">
   <span class="spacing"></span>
+
   <div class="flex flex-row search_component">
     <div class="browse_text">
       <h1>Browse GPU Listings</h1>
@@ -7,31 +8,34 @@
 
     <mat-form-field
       class="search_field"
-      appearance="fill"
+      appearance="outline"
       subscriptSizing="dynamic"
     >
-      <mat-label>Enter name of listing</mat-label>
+      <mat-label>Enter name of GPU listing</mat-label>
       <input
         matInput
         type="text"
         [formControl]="qControl"
         (keydown.enter)="onSubmit()"
+        placeholder="e.g. RTX 4090"
       />
 
       <button
         mat-mini-fab
         matSuffix
-        class="search_button"
         color="primary"
         type="submit"
+        class="search_button_fab"
         (click)="onSubmit()"
       >
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>
   </div>
+
   <span class="spacing"></span>
 </div>
+
 <div class="flex flex-row">
   <app-filterbar class="filterbar-root" />
   <app-listings class="listings-root" [data]="data" [isLoading]="isLoading" />

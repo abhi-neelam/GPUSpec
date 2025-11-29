@@ -3,10 +3,10 @@ h3 {
 }
 
 .form {
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin: 20px;
+  width: 100%;
+  max-width: 400px;
+  gap: 16px;
 }
 
 .no-margin {
@@ -15,4 +15,74 @@ h3 {
 
 .button {
   width: 100%;
+  margin-top: 8px;
+}
+
+.server-error {
+  color: #f44336;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.password-requirements {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.weak-password-msg {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.req-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.last-section {
+  margin-bottom: 0px;
+}
+
+.req-title {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.req-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.req-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #757575;
+  font-weight: 500;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: #bdbdbd;
+  }
+
+  &.valid {
+    color: #2e7d32;
+
+    mat-icon {
+      color: #4caf50;
+    }
+  }
+}
+
+.sign-up {
+  margin-top: 0px;
 }

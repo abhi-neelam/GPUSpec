@@ -60,6 +60,9 @@ export class LoginPageComponent {
       return;
     }
 
+    const returnUrl =
+      this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+
     var loginRequest = <LoginRequest>{};
     loginRequest.email = this.loginForm.controls['email'].value;
     loginRequest.password = this.loginForm.controls['password'].value;
@@ -71,7 +74,7 @@ export class LoginPageComponent {
           this.snackBar.open('Logged in', undefined, {
             duration: 2000,
           });
-          this.router.navigate(['/']);
+          this.router.navigate([returnUrl], { replaceUrl: true });
         }
       },
       error: (error) => {

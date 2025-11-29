@@ -1,34 +1,38 @@
-<div class="flex flex-row flex-center">
-  <article class="flex flex-column flex-center gap">
-    <h1>GPUSpec</h1>
-    <h2>GPU Technical Specifications</h2>
-    <p>
-      View GPU product listings with detailed GPU specification from various
-      manufacturers.
-    </p>
+<div class="hero-container flex flex-column flex-center">
+  <article class="content-wrapper flex flex-column flex-center">
+    <div class="text-center">
+      <h1 class="brand-title">GPUSpec</h1>
+      <h2 class="subtitle">GPU Technical Specifications</h2>
+      <p class="description">
+        View GPU product listings with detailed specifications from top
+        manufacturers.
+      </p>
+    </div>
+
     <form
-      class="search_form flex flex-column flex-center"
+      class="search-bar-container"
       [formGroup]="searchForm"
       (ngSubmit)="onSubmit()"
     >
       <mat-form-field
-        class="search_field"
-        appearance="fill"
-        style="margin-bottom: -1em"
+        class="search-input"
+        appearance="outline"
+        subscriptSizing="dynamic"
       >
+        <mat-label>Search GPU Listing</mat-label>
         <input
           type="text"
           matInput
           formControlName="name"
-          placeholder="Enter name of listing"
+          placeholder="e.g. RTX 4090"
         />
       </mat-form-field>
+
       <button
-        class="button search_button"
+        class="search-button"
         mat-flat-button
         color="primary"
         type="submit"
-        (click)="onSubmit()"
       >
         Search
       </button>

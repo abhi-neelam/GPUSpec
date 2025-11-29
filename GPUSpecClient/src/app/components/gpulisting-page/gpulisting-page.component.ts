@@ -59,8 +59,16 @@ export class GPUListingPageComponent {
   }
 
   onToggleFavorite() {
+    let snapshot = this.router.routerState.snapshot;
+
     if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login'], {
+        relativeTo: this.activatedRoute,
+        queryParams: {
+          returnUrl: snapshot.url,
+        },
+        queryParamsHandling: 'merge',
+      });
       return;
     }
 

@@ -20,7 +20,6 @@ h1 {
   height: 50vh;
 }
 
-// Styles for when the user has no favorites
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -53,11 +52,10 @@ h1 {
   gap: 16px;
 }
 
-// The main card style
 .favorite-card {
   display: block;
   background: white;
-  border: 2px solid #e0e0e0; // Default gray border
+  border: 2px solid #e0e0e0;
   border-radius: 12px;
   padding: 24px;
   cursor: pointer;
@@ -66,7 +64,6 @@ h1 {
   transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out,
     transform 0.1s ease-in-out;
 
-  // Purple hover effect similar to other listing tiles
   &:hover {
     box-shadow: 0 8px 24px rgba(123, 31, 162, 0.25);
     border-color: #7b1fa2;
@@ -86,7 +83,6 @@ h1 {
   gap: 8px;
 }
 
-// Badge styles consistent with your other pages
 .badges {
   display: flex;
   gap: 8px;
@@ -102,8 +98,13 @@ h1 {
 }
 
 .manufacturer-badge {
-  background-color: #7b1fa2; // Unified purple color
+  background-color: #7b1fa2;
   color: white;
+}
+
+.manufacturer-badge:hover {
+  background-color: #7b1fa2;
+  color: white !important;
 }
 
 .product-name {
@@ -122,14 +123,12 @@ h1 {
 }
 
 .card-actions {
-  // Centers the button vertically against the text block
   display: flex;
   align-items: center;
   height: 100%;
   padding-left: 16px;
 }
 
-// Button styles with hover animation
 .remove-favorite-btn {
   transform: scale(1);
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s;
@@ -140,7 +139,6 @@ h1 {
     height: 28px;
     transition: color 0.2s;
 
-    // Always red since it's in the favorites list
     &.is-favorite {
       color: #f44336;
     }
@@ -150,7 +148,6 @@ h1 {
     transform: scale(1.15);
     background-color: rgba(244, 67, 54, 0.1) !important;
 
-    // Darker red on hover
     mat-icon.is-favorite {
       color: #d32f2f;
     }

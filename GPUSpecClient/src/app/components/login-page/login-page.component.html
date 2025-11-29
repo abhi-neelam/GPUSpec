@@ -41,7 +41,11 @@
 
     <div class="flex flex-center flex-row">
       <p class="no-margin" color="primary">Not Registered?</p>
-      <a color="primary" [routerLink]="['/signup']">
+      <a
+        color="primary"
+        [routerLink]="['/signup']"
+        queryParamsHandling="preserve"
+      >
         <strong>Sign Up</strong></a
       >
     </div>

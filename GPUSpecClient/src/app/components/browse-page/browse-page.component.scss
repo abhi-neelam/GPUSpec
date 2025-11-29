@@ -1,31 +1,55 @@
 .search_container {
-  justify-content: center;
-  align-items: stretch !important;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-.search_component {
-  justify-content: center;
-  align-items: stretch !important;
-  flex-grow: 4;
-}
-.search_field {
-  flex-grow: 4;
-}
-h1 {
-  margin: 0px;
-  font-size: 18px;
-}
-.browse_text {
   display: flex;
   align-items: center;
+  margin: 30px 20px;
 }
+
+.search_component {
+  display: flex;
+  align-items: center;
+  flex-grow: 10;
+  gap: 24px;
+}
+
+.search_field {
+  width: 100%;
+  font-size: 16px;
+}
+
+.browse_text h1 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+h1 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
 .search_button {
   margin-right: 8px;
 }
+
 .spacing {
   flex-grow: 1;
+}
+
+.search_button_fab {
+  box-shadow: none;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .listings-root {

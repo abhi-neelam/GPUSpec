@@ -28,7 +28,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = false; // TODO - decide on stronger password scheme
+    options.SignIn.RequireConfirmedAccount = false;
+
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddAuthentication(opt =>
