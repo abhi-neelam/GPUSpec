@@ -33,6 +33,7 @@ namespace GPUSpecServer.Data
             IConfigurationBuilder builder = new ConfigurationBuilder();
             builder = builder.AddJsonFile("appsettings.json");
             builder = builder.AddJsonFile("appsettings.Development.json", true);
+            builder = builder.AddJsonFile("appsettings.Production.json", true);
             builder = builder.AddUserSecrets<ApplicationDbContext>(true);
             IConfigurationRoot configuration = builder.Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
