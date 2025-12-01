@@ -57,28 +57,6 @@
     </div>
   </div>
 
-  <h4><strong>Process Size (nm)</strong></h4>
-  <span class="range-display"
-    >{{ minProcessSize }} nm - {{ maxProcessSize }} nm</span
-  >
-  <div class="flex flex-row slider">
-    <mat-slider [min]="minProcessLimit" [max]="maxProcessLimit" step="1">
-      <input [(ngModel)]="minProcessSize" matSliderStartThumb />
-      <input [(ngModel)]="maxProcessSize" matSliderEndThumb />
-    </mat-slider>
-
-    <div class="button-container">
-      <button
-        class="button"
-        mat-flat-button
-        color="primary"
-        (click)="onSubmit()"
-      >
-        Done
-      </button>
-    </div>
-  </div>
-
   <h4><strong>Release Year</strong></h4>
   <span class="range-display">{{ minReleaseYear }} - {{ maxReleaseYear }}</span>
   <div class="flex flex-row slider">

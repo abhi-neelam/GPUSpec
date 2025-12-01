@@ -4,6 +4,11 @@ using System.ComponentModel.DataAnnotations;
 namespace GPUSpecServer.Data.Models
 {
     [Index(nameof(release_date))]
+    [Index(nameof(manufacturer))]
+    [Index(nameof(architecture))]
+    [Index(nameof(generation))]
+    [Index(nameof(memory_type))]
+    [Index(nameof(memory_size))]
     public class Listing
     {
         public int Id { get; set; }

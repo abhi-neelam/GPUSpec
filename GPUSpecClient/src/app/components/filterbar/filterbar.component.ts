@@ -15,8 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   defaultMinMemorySize,
   defaultMaxMemorySize,
-  defaultMinProcessSize,
-  defaultMaxProcessSize,
   defaultMinReleaseYear,
   defaultMaxReleaseYear,
   defaultArchitecture,
@@ -43,8 +41,6 @@ export class FilterbarComponent {
 
   readonly minMemoryLimit = defaultMinMemorySize;
   readonly maxMemoryLimit = defaultMaxMemorySize;
-  readonly minProcessLimit = defaultMinProcessSize;
-  readonly maxProcessLimit = defaultMaxProcessSize;
   readonly minYearLimit = defaultMinReleaseYear;
   readonly maxYearLimit = defaultMaxReleaseYear;
 
@@ -54,9 +50,6 @@ export class FilterbarComponent {
 
   minMemorySize: number = defaultMinMemorySize;
   maxMemorySize: number = defaultMaxMemorySize;
-
-  minProcessSize: number = defaultMinProcessSize;
-  maxProcessSize: number = defaultMaxProcessSize;
 
   minReleaseYear: number = defaultMinReleaseYear;
   maxReleaseYear: number = defaultMaxReleaseYear;
@@ -74,14 +67,6 @@ export class FilterbarComponent {
       this.maxMemorySize = params['max_memory_size']
         ? Number(params['max_memory_size'])
         : this.maxMemoryLimit;
-
-      this.minProcessSize = params['min_process_size']
-        ? Number(params['min_process_size'])
-        : this.minProcessLimit;
-
-      this.maxProcessSize = params['max_process_size']
-        ? Number(params['max_process_size'])
-        : this.maxProcessLimit;
 
       this.minReleaseYear = params['min_release_year']
         ? Number(params['min_release_year'])
@@ -117,8 +102,6 @@ export class FilterbarComponent {
         memory_type: this.selectedMemoryType,
         min_memory_size: this.minMemorySize,
         max_memory_size: this.maxMemorySize,
-        min_process_size: this.minProcessSize,
-        max_process_size: this.maxProcessSize,
         min_release_year: this.minReleaseYear,
         max_release_year: this.maxReleaseYear,
         pageIndex: 1,

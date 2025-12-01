@@ -36,7 +36,8 @@ namespace GPUSpecServer.Data
             builder = builder.AddJsonFile("appsettings.Production.json", true);
             builder = builder.AddUserSecrets<ApplicationDbContext>(true);
             IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+            opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds))
             .UseSeeding((context, _) =>
             {
                 var chips = context.Set<Chip>().ToDictionary(c => c.Name, c => c);

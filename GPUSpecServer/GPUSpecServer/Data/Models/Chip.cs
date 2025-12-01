@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 namespace GPUSpecServer.Data.Models
 {
     [Index(nameof(Name))]
+    [Index(nameof(process_size))]
     public class Chip
     {
         public int Id { get; set; }
