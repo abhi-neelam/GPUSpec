@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace GPUSpecServer.Data.Models
 {
+    [Index(nameof(release_date))]
     public class Listing
     {
         public int Id { get; set; }

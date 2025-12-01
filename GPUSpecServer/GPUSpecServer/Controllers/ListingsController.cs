@@ -109,8 +109,15 @@ namespace GPUSpecServer.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedResult<ListingDTO>>> GetListings([FromQuery] ListingSearchParams searchParams, int pageIndex = 1, int pageSize = 10, string orderBy = "desc")
         {
-            var query = FilterQuery(_context.Listings.AsNoTracking(), searchParams).Select(ListingDTO.Projection);
-            return await PagedResult<ListingDTO>.CreateAsync(query, pageIndex, pageSize, "release_date", orderBy);
+            var query = FilterQuery(_context.Listings.AsNoTracking(), searchParams);
+
+            return await PagedResult<ListingDTO>.CreateAsync(
+                query,
+                ListingDTO.Projection,
+                pageIndex,
+                pageSize,
+                "release_date",
+                orderBy);
         }
 
         // GET: api/Listings/5

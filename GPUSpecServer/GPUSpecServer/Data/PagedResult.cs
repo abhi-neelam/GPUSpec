@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using GPUSpecServer.Data.Migrations;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 
@@ -18,24 +19,28 @@ namespace GPUSpecServer.Data
             TotalCount = count;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
         }
-        public static async Task<PagedResult<T>> CreateAsync(
-          IQueryable<T> source,
-          int pageIndex,
-          int pageSize,
-          string sortColumn,
-          string sortOrder= "desc"
-            )
+
+        public static async Task<PagedResult<T>> CreateAsync<TEntity>(
+            IQueryable<TEntity> source,
+            System.Linq.Expressions.Expression<Func<TEntity, T>> selector,
+            int pageIndex,
+            int pageSize,
+            string sortColumn,
+            string sortOrder = "desc")
         {
             var count = await source.CountAsync();
+
             source = source.OrderBy($"{sortColumn} {sortOrder}")
-              .Skip((pageIndex - 1) * pageSize)
-              .Take(pageSize);
-            var data = await source.ToListAsync();
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize);
+
+            var data = await source.Select(selector).ToListAsync();
+
             return new PagedResult<T>(
-              data,
-              count,
-              pageIndex,
-              pageSize);
+                data,
+                count,
+                pageIndex,
+                pageSize);
         }
 
         public List<T> Data

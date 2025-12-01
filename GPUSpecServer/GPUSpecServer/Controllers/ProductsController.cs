@@ -27,7 +27,14 @@ namespace GPUSpecServer.Controllers
         public async Task<ActionResult<PagedResult<Product>>> GetProducts([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 10)
         {
             var query = _context.Products.AsNoTracking();
-            return await PagedResult<Product>.CreateAsync(query, pageIndex, pageSize, "Name", "");
+
+            return await PagedResult<Product>.CreateAsync(
+                query,
+                p => p,
+                pageIndex,
+                pageSize,
+                "Name",
+                "asc");
         }
 
         // GET: api/Products/5
