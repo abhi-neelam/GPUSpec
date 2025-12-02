@@ -9,6 +9,7 @@ namespace GPUSpecServer.Data.Models
     [Index(nameof(generation))]
     [Index(nameof(memory_type))]
     [Index(nameof(memory_size))]
+    [Index(nameof(product_name))]
     public class Listing
     {
         public int Id { get; set; }
@@ -34,6 +35,8 @@ namespace GPUSpecServer.Data.Models
 
         public int ProductId { get; set; }
         public Product Product { get; set; } = null!;
+
+        public required string product_name { get; set; }
 
         public required float l1_cache { get; set; }
         public required float l2_cache { get; set; }

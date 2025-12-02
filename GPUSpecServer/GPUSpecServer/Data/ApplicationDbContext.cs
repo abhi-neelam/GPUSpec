@@ -95,7 +95,7 @@ namespace GPUSpecServer.Data
 
                         var listing = new Listing
                         {
-                            Product = _product, Chip = _chip,
+                            Product = _product, Chip = _chip, product_name = record.product,
                             architecture = record.architecture, generation = record.generation, manufacturer = record.manufacturer,
                             base_clock = (int)(record.base_clock), boost_clock = (int)(record.boost_clock), memory_clock = ConvertHelper.SafeFloatToInt(record.memory_clock),
                             release_date = record.release_date, bus_interface = ConvertHelper.SafeStringToNullableString(record.bus_interface), memory_size = record.memory_size,

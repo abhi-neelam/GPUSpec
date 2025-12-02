@@ -270,6 +270,10 @@ namespace GPUSpecServer.Data.Migrations
                     b.Property<string>("power_connectors")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("product_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateOnly?>("release_date")
                         .HasColumnType("date");
 
@@ -318,6 +322,8 @@ namespace GPUSpecServer.Data.Migrations
                     b.HasIndex("memory_size");
 
                     b.HasIndex("memory_type");
+
+                    b.HasIndex("product_name");
 
                     b.HasIndex("release_date");
 
